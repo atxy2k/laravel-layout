@@ -26,7 +26,6 @@ class ItemMenu
         $this->icon = $icon;
         $this->extras = $extras;
         $this->url = $local ? url($url) : $url;
-        $this->extras = $extras;
     }
 
     /**
@@ -64,4 +63,20 @@ class ItemMenu
         $this->extras = $extras;
         return $this;
     }
+
+    public function getIcon() : ?string
+    {
+        return $this->icon;
+    }
+
+    public function getUrl() : ?string
+    {
+        return $this->url;
+    }
+
+    public function getExtras() : array
+    {
+        return $this->extras;
+    }
+
 }
