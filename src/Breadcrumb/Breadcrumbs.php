@@ -5,13 +5,21 @@
  * Date: 15/2/2019
  * Time: 21:50
  */
+use Illuminate\Support\Collection;
+
 class Breadcrumbs
 {
-    protected $elements = [];
+    /** @var Collection|null */
+    protected $elements = null;
+
+    public function __construct()
+    {
+        $this->elements = new Collection();
+    }
 
     public function push( BreadcrumbElement $element ) : Breadcrumbs
     {
-        $this->elements[] = $element;
+        $this->elements->push($element);
         return $this;
     }
 
@@ -44,14 +52,26 @@ class Breadcrumbs
 
     public function isEmpty() : bool
     {
-        return count($this->elements) == 0;
+        return $this->elements->isEmpty();
     }
 
+    public function isNotEmpty() : bool
+    {
+        return $this->elements->isNotEmpty();
+    }
+
+
+    /**
+     * @return bool
+     */
     public function hasElements() : bool {
-        return count($this->elements) > 0;
+        return $this->elements->isNotEmpty();
     }
 
-    public function getElements() : array
+    /**
+     * @return Collection
+     */
+    public function getElements() : Collection
     {
         return $this->elements;
     }

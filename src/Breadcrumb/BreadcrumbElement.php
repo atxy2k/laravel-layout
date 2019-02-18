@@ -7,9 +7,9 @@
  */
 class BreadcrumbElement
 {
-    public $url = null;
-    public $text = null;
-    public $active = false;
+    protected $url = null;
+    protected $text = null;
+    protected $active = false;
 
     /**
      * BreadcrumbElement constructor.
@@ -27,6 +27,60 @@ class BreadcrumbElement
     public static function create( string $url, string $text, bool $active = false) : BreadcrumbElement
     {
         return new BreadcrumbElement($url, $text, $active);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @param $url
+     * @return BreadcrumbElement
+     */
+    public function setUrl($url): BreadcrumbElement
+    {
+        $this->url = $url;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getText(): ?string
+    {
+        return $this->text;
+    }
+
+    /**
+     * @param string|null $text
+     * @return BreadcrumbElement
+     */
+    public function setText(?string $text): BreadcrumbElement
+    {
+        $this->text = $text;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive(): bool
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     * @return BreadcrumbElement
+     */
+    public function setActive(bool $active): BreadcrumbElement
+    {
+        $this->active = $active;
+        return $this;
     }
 
 }

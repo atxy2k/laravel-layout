@@ -32,23 +32,76 @@ class QuickAction
         $this->category = $category;
     }
 
+    /**
+     * @param string $url
+     * @param string $title
+     * @param string $icon
+     * @param array $extras
+     * @param string|null $category
+     * @param bool $local
+     * @return QuickAction
+     */
     public static function create( string $url, string $title,string $icon, array $extras = [], string $category = null, $local = true ) : QuickAction
     {
         return new QuickAction($url, $title,$icon, $extras, $category, $local);
     }
 
+    /**
+     * @return bool
+     */
     public function hasIcon() : bool
     {
         return !is_null($this->icon);
     }
 
-    public function url() : string
+    /**
+     * @return \Illuminate\Contracts\Routing\UrlGenerator|string|null
+     */
+    public function getUrl()
     {
-        return $this->local ? url($this->url) : $this->url;
+        return $this->url;
     }
 
-    public function category() : ?string
+    /**
+     * @return string|null
+     */
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    /**
+     * @return array
+     */
+    public function getExtras(): array
+    {
+        return $this->extras;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isLocal(): bool
+    {
+        return $this->local;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCategory(): ?string
     {
         return $this->category;
     }
+
+
+
 }
