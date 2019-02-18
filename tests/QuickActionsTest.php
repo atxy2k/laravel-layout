@@ -119,9 +119,11 @@ class QuickActionsTest extends TestCase
         $icon = 'fa fa-plus';
         $category = 'category';
         $quickActions = new QuickActions();
-        $quickAction = QuickAction::create($url, $title, $icon);
+        $quickAction = QuickAction::create($url, $title, $icon, [], $category);
         $_quickAction = QuickAction::create($url, $title, $icon);
         $this->assertInstanceOf(QuickActions::class, $quickActions->addActions(collect([$quickAction, $_quickAction])));
+        $this->assertEquals(1, $quickActions->getElements($category)->count());
+        $this->assertEquals(2, $quickActions->getElements()->count());
     }
 
 }
