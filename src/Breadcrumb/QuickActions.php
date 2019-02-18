@@ -62,7 +62,7 @@ class QuickActions
      */
     public function addActions($actions) : QuickActions
     {
-        throw_if(!is_array($actions) || !$actions instanceof Collection, UnsupportedFormatException::class);
+        throw_if(!is_array($actions) && !$actions instanceof Collection, UnsupportedFormatException::class);
         foreach ( $actions as $action )
         {
             if( $action instanceof QuickAction )
@@ -112,7 +112,7 @@ class QuickActions
      */
     public function isEmpty(string $category = null) : bool
     {
-        return is_null($category) ? $this->actions->isNotEmpty() : $this->actions->where('category', $category)->isEmpty();
+        return is_null($category) ? $this->actions->isEmpty() : $this->actions->where('category', $category)->isEmpty();
     }
 
     /**
@@ -125,9 +125,9 @@ class QuickActions
         return is_null($category) ? $this->actions->isNotEmpty() : $this->actions->where('category', $category)->isNotEmpty();
     }
 
-
     public function getElements(string $category = null) : Collection
     {
         return is_null($category) ? $this->actions : $this->actions->where('category', $category);
     }
+
 }

@@ -5,12 +5,19 @@
  * Date: 15/2/2019
  * Time: 21:44
  */
+use Illuminate\Support\Collection;
+
 class Menu
 {
+    /** @var string|null */
     public $title = null;
+    /** @var string|null  */
     public $icon = null;
+    /**
+     * @var Collection|null
+     */
+    public $items = null;
 
-    public $items = [];
     /**
      * Menu constructor.
      * @param null $title
@@ -18,52 +25,94 @@ class Menu
      */
     public function __construct($title, $icon)
     {
+        $this->items = new Collection();
         $this->title = $title;
         $this->icon = $icon;
     }
 
+    /**
+     * @param string $title
+     * @param string $icon
+     * @return Menu
+     */
     public static function create(string $title, string $icon) : Menu
     {
         return new Menu($title, $icon);
     }
 
+    /**
+     * @param ItemMenu $item
+     * @return Menu
+     */
     public function addItem(ItemMenu $item ) : Menu
     {
-        $this->items[] = $item;
+        $this->items->push($item);
         return $this;
     }
 
+    /**
+     * @param ItemMenu $item
+     * @return Menu
+     */
     public function add(ItemMenu $item ) : Menu
     {
         return $this->addItem($item);
     }
 
+    /**
+     * @param ItemMenu $item
+     * @return Menu
+     */
     public function push(ItemMenu $item ) : Menu
     {
         return $this->addItem($item);
     }
 
+    /**
+     * @param ItemMenu $item
+     * @return Menu
+     */
     public function pushItem(ItemMenu $item ) : Menu
     {
         return $this->addItem($item);
     }
 
-    public function items() : array
+    /**
+     * @return Collection
+     */
+    public function items() : Collection
     {
         return $this->items;
     }
 
-    public function has_elements() : bool
+    /**
+     * @return bool
+     */
+    public function hasElements() : bool
     {
-        return count($this->items) > 0;
+        return $this->items->isNotEmpty();
     }
 
-    public function is_empty() : bool
+    /**
+     * @return bool
+     */
+    public function isEmpty() : bool
     {
-        return count($this->items) === 0;
+        return $this->items->isEmpty();
     }
 
-    public function getElements() : array
+    /**
+     * @return bool
+     */
+    public function isNotEmpty() : bool
+    {
+        return $this->items->isNotEmpty();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getElements() : Collection
     {
         return $this->items;
     }

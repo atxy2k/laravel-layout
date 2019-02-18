@@ -10,22 +10,22 @@ use Illuminate\Support\Collection;
  */
 class Breadcrumb
 {
-    /** @var string  */
-    protected $title    = '';
-    /** @var string  */
-    protected $subtitle = '';
-    /** @var string  */
-    protected $icon = '';
+    /** @var string|null  */
+    protected $title    = null;
+    /** @var string|null  */
+    protected $subtitle = null;
+    /** @var string|null  */
+    protected $icon = null;
     /** @var QuickActions */
     protected $quickActions = null;
     /** @var Breadcrumbs  */
-    protected $breadcrumbs = [];
+    protected $breadcrumbs = null;
 
     /**
      * Menu sections
-     * @var array
+     * @var Collection
      */
-    protected $sections = [];
+    protected $sections = null;
 
     /**
      * Is the breadcrumb enabled?
@@ -42,7 +42,7 @@ class Breadcrumb
      * Back url
      * @var string
      */
-    protected $back     = '';
+    protected $back     = '/';
     /**
      * Do you need a string url to identify current action in the menu is active?
      * @var string
@@ -55,6 +55,7 @@ class Breadcrumb
         $this->back = url('/');
         $this->quickActions = new QuickActions();
         $this->breadcrumbs = new Breadcrumbs();
+        $this->sections = new Collection();
     }
 
     /**
@@ -214,7 +215,7 @@ class Breadcrumb
      * return Breadcrumb instance
      * @return Breadcrumb
      */
-    public function addBreadcrumbElement( $localUrlOrBreadcrumbElement, string $text, $active = false) : Breadcrumb
+    public function addBreadcrumbElement( $localUrlOrBreadcrumbElement, string $text = null, $active = false) : Breadcrumb
     {
         if($localUrlOrBreadcrumbElement instanceof BreadcrumbElement)
             $this->breadcrumbs->push($localUrlOrBreadcrumbElement);
@@ -241,7 +242,7 @@ class Breadcrumb
     }
 
     /**
-     * Add a quickaction object or yuu can send all params to create it
+     * Add a QuickAction object or yuu can send all params to create it
      * Local url or QuickAction object
      * @param string|QuickAction
      * Text
@@ -250,12 +251,14 @@ class Breadcrumb
      * @param string $icon
      * Extra params
      * @param array $extras
+     * Default category for the action
+     * @param string $category
      * Is url local
      * @param bool $local
      * This breadcrumb instance
      * @return Breadcrumb
      */
-    public function addQuickAction($localUrlOrQuickAction, string $text, string $icon, array $extras = [], string $category = null, bool $local = true) : Breadcrumb
+    public function addAction($localUrlOrQuickAction, string $text = null, string $icon = null, array $extras = [], string $category = null, bool $local = true) : Breadcrumb
     {
         if($localUrlOrQuickAction instanceof QuickAction)
             $this->quickActions->add($localUrlOrQuickAction);
@@ -263,55 +266,6 @@ class Breadcrumb
             $this->quickActions->push(QuickAction::create(
                 $localUrlOrQuickAction, $text, $icon, $extras, $category, $local
             ));
-        return $this;
-    }
-
-    /**
-     * Return if current menu has sections to print
-     * @return bool
-     */
-    public function hasSections() : bool
-    {
-        return count($this->sections) > 0;
-    }
-
-    /**
-     * Return current menu's sections
-     * @return array
-     */
-    public function getSections() : array
-    {
-        return $this->sections;
-    }
-
-    /**
-     * Add section to menu
-     * @param Section $section
-     * @return Breadcrumb
-     */
-    public function addSection( Section $section ) : Breadcrumb
-    {
-        $this->sections[] = $section;
-        return $this;
-    }
-
-    /**
-     * Add section to menu
-     * @param Section $section
-     * @return Breadcrumb
-     */
-    public function pushSection(Section $section) : Breadcrumb
-    {
-        return $this->addSection($section);
-    }
-
-    /**
-     * @param QuickAction $action
-     * @return Breadcrumb
-     */
-    public function addAction( QuickAction $action ) : Breadcrumb
-    {
-        $this->quickActions->add($action);
         return $this;
     }
 
@@ -326,10 +280,57 @@ class Breadcrumb
     }
 
     /**
+     * Return if current menu has sections to print
+     * @return bool
+     */
+    public function hasSections() : bool
+    {
+        return $this->sections->isNotEmpty();
+    }
+
+    /**
+     * Return current menu's sections
+     * @return Collection
+     */
+    public function getSections() : Collection
+    {
+        return $this->sections;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSectionsEmpty() : bool
+    {
+        return $this->sections->isEmpty();
+    }
+
+    /**
+     * Add section to menu
+     * @param Section $section
+     * @return Breadcrumb
+     */
+    public function addSection( Section $section ) : Breadcrumb
+    {
+        $this->sections->push($section);
+        return $this;
+    }
+
+    /**
+     * Add section to menu
+     * @param Section $section
+     * @return Breadcrumb
+     */
+    public function pushSection(Section $section) : Breadcrumb
+    {
+        return $this->addSection($section);
+    }
+
+    /**
      * Return current global action
      * @return string
      */
-    public function getIcon(): string
+    public function getIcon(): ?string
     {
         return $this->icon;
     }
