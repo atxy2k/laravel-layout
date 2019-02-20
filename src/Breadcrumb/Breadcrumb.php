@@ -20,7 +20,8 @@ class Breadcrumb
     protected $quickActions = null;
     /** @var Breadcrumbs  */
     protected $breadcrumbs = null;
-
+    /** @var string|null */
+    protected $cover = null;
     /**
      * Menu sections
      * @var Collection
@@ -353,6 +354,30 @@ class Breadcrumb
     public function hasIcon()
     {
         return !empty($this->icon);
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    /**
+     * @param string|null $cover
+     */
+    public function setCover(string $cover): void
+    {
+        $this->cover = asset($cover);
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasCover() : bool
+    {
+        return !is_null($this->cover);
     }
 
 }
