@@ -90,6 +90,22 @@ class Section
     /**
      * @return bool
      */
+    public function hasItemMenus() : bool
+    {
+        return $this->items->whereInstanceOf(ItemMenu::class)->count() > 0;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasMenus() : bool
+    {
+        return $this->items->whereInstanceOf(Menu::class)->count() > 0;
+    }
+
+    /**
+     * @return bool
+     */
     public function isEmpty() : bool
     {
         return $this->items->isEmpty();
