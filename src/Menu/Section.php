@@ -96,6 +96,13 @@ class Section
     }
 
     /**
+     * @return Collection
+     */
+    public function getItemMenus() : Collection
+    {
+        return $this->items->whereInstanceOf(ItemMenu::class);
+    }
+    /**
      * @return bool
      */
     public function hasMenus() : bool
@@ -103,6 +110,13 @@ class Section
         return $this->items->whereInstanceOf(Menu::class)->count() > 0;
     }
 
+    /**
+     * @return Collection
+     */
+    public function getMenus() : Collection
+    {
+        return $this->items->whereInstanceOf(Menu::class);
+    }
     /**
      * @return bool
      */
