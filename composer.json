@@ -1,46 +1,49 @@
 {
-    "name": "atxy2k/layout",
-    "description": "Layout utils for classic php apps",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Ivan Alvarado",
-            "email": "ivan.alvarado@serprogramador.es",
-            "homepage": "https://serprogramador.es"
-        }
-    ],
-    "homepage": "https://github.com/atxy2k/layout",
-    "keywords": ["Laravel", "Layout"],
-    "require": {
-        "illuminate/support": "~6"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~7.0",
-        "mockery/mockery": "^1.1",
-        "orchestra/testbench": "~3.0",
-        "sempro/phpunit-pretty-print": "^1.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Atxy2k\\Layout\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Atxy2k\\Layout\\Tests\\": "tests"
-        }
-    },
-    "extra": {
-        "laravel": {
-            "providers": [
-                "Atxy2k\\Layout\\LayoutServiceProvider"
-            ],
-            "aliases": {
-                "Layout": "Atxy2k\\Layout\\Facades\\Layout"
-            }
-        }
-    },
-    "scripts": {
-        "test": "vendor\\bin\\phpunit"
+  "name": "atxy2k/layout",
+  "description": "Layout utils for classic php apps",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ivan Alvarado",
+      "email": "ivan.alvarado@serprogramador.es",
+      "homepage": "https://serprogramador.es"
     }
+  ],
+  "homepage": "https://github.com/atxy2k/layout",
+  "keywords": [
+    "Laravel",
+    "Layout"
+  ],
+  "require": {
+    "illuminate/support": "~7"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~7.0",
+    "mockery/mockery": "^1.1",
+    "orchestra/testbench": "~3.0",
+    "sempro/phpunit-pretty-print": "^1.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "Atxy2k\\Layout\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Atxy2k\\Layout\\Tests\\": "tests"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Atxy2k\\Layout\\LayoutServiceProvider"
+      ],
+      "aliases": {
+        "Layout": "Atxy2k\\Layout\\Facades\\Layout"
+      }
+    }
+  },
+  "scripts": {
+    "test": "vendor\\bin\\phpunit"
+  }
 }
