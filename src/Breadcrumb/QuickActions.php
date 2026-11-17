@@ -83,7 +83,7 @@ class QuickActions
      * @param bool $local
      * @return QuickActions
      */
-    public function pushFrom( string $localUrl, string $text, string $icon, array $extras = [], string $category = null, bool $local = true ) : QuickActions
+    public function pushFrom( string $localUrl, string $text, string $icon, array $extras = [], ?string $category = null, bool $local = true ) : QuickActions
     {
         $action = QuickAction::create($localUrl, $text, $icon, $extras, $category,$local);
         $this->actions->push($action);
@@ -100,7 +100,7 @@ class QuickActions
      * @param bool $local
      * @return QuickActions
      */
-    public function addFrom( string $localUrl, string $text, string $icon, array $extras = [], string $category = null, bool $local = true ) : QuickActions
+    public function addFrom( string $localUrl, string $text, string $icon, array $extras = [], ?string $category = null, bool $local = true ) : QuickActions
     {
         return $this->pushFrom($localUrl, $text, $icon, $extras, $category, $local);
     }
@@ -110,7 +110,7 @@ class QuickActions
      * @param string|null $category
      * @return bool
      */
-    public function isEmpty(string $category = null) : bool
+    public function isEmpty(?string $category = null) : bool
     {
         return is_null($category) ? $this->actions->isEmpty() : $this->actions->where('category', $category)->isEmpty();
     }
@@ -120,12 +120,12 @@ class QuickActions
      * @param string|null $category
      * @return bool
      */
-    public function isNotEmpty(string $category = null) : bool
+    public function isNotEmpty(?string $category = null) : bool
     {
         return is_null($category) ? $this->actions->isNotEmpty() : $this->actions->where('category', $category)->isNotEmpty();
     }
 
-    public function getElements(string $category = null) : Collection
+    public function getElements(?string $category = null) : Collection
     {
         return is_null($category) ? $this->actions : $this->actions->where('category', $category);
     }

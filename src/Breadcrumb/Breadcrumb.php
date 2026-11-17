@@ -182,7 +182,7 @@ class Breadcrumb
      * @param string|null $category
      * @return bool
      */
-    public function hasActions(string $category = null) : bool
+    public function hasActions(?string $category = null) : bool
     {
         return $this->quickActions->isNotEmpty($category);
     }
@@ -216,7 +216,7 @@ class Breadcrumb
      * return Breadcrumb instance
      * @return Breadcrumb
      */
-    public function addBreadcrumbElement( $localUrlOrBreadcrumbElement, string $text = null, $active = false) : Breadcrumb
+    public function addBreadcrumbElement( $localUrlOrBreadcrumbElement, ?string $text = null, $active = false) : Breadcrumb
     {
         if($localUrlOrBreadcrumbElement instanceof BreadcrumbElement)
             $this->breadcrumbs->push($localUrlOrBreadcrumbElement);
@@ -259,7 +259,7 @@ class Breadcrumb
      * This breadcrumb instance
      * @return Breadcrumb
      */
-    public function addAction($localUrlOrQuickAction, string $text = null, string $icon = null, array $extras = [], string $category = null, bool $local = true) : Breadcrumb
+    public function addAction($localUrlOrQuickAction, ?string $text = null, ?string $icon = null, array $extras = [], ?string $category = null, bool $local = true) : Breadcrumb
     {
         if($localUrlOrQuickAction instanceof QuickAction)
             $this->quickActions->add($localUrlOrQuickAction);
@@ -275,7 +275,7 @@ class Breadcrumb
      * @param string|null $category
      * @return Collection
      */
-    public function getActions(string $category = null) : Collection
+    public function getActions(?string $category = null) : Collection
     {
         return $this->quickActions->getElements($category);
     }
