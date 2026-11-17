@@ -2,6 +2,11 @@
 
 All notable changes to `Layout` will be documented in this file.
 
+## Version 1.2.5
+
+### Fixed
+- PHP 8.4 compatibility: optional parameters with a `null` default are now explicitly nullable (`?string $param = null`), removing the "Implicitly marking parameter as nullable" deprecations. Signatures are unchanged.
+
 ## Version 1.2.4
 
 ### Added
