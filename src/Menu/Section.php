@@ -43,7 +43,7 @@ class Section
      * @param int $type
      * @return Section
      */
-    public static function create( string $title, string $icon = null, bool $new = false, int $type = 1) : Section
+    public static function create( string $title, ?string $icon = null, bool $new = false, int $type = 1) : Section
     {
         return new Section($title, $icon, $new, $type);
     }

@@ -22,7 +22,7 @@ class QuickAction
      * @param array $extras
      * @param bool $isLocalUrl
      */
-    public function __construct(string $url, string $title, string $icon, array $extras = [], string $category = null, $isLocalUrl = true)
+    public function __construct(string $url, string $title, string $icon, array $extras = [], ?string $category = null, $isLocalUrl = true)
     {
         $this->url = $isLocalUrl ? url($url) : $url;
         $this->title = $title;
@@ -41,7 +41,7 @@ class QuickAction
      * @param bool $local
      * @return QuickAction
      */
-    public static function create( string $url, string $title,string $icon, array $extras = [], string $category = null, $local = true ) : QuickAction
+    public static function create( string $url, string $title,string $icon, array $extras = [], ?string $category = null, $local = true ) : QuickAction
     {
         return new QuickAction($url, $title,$icon, $extras, $category, $local);
     }
